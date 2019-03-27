@@ -120,7 +120,6 @@
     {% include "header.html" %} {%- block header %}{% endblock header %}
     <section  class="container-fluid central-page-area">
       <div class="row">
-        {% if pagename != 'index' %}
         <nav class="full-toctree-nav navbar-expand-lg navbar-light">
           <div class="side-scroll collapse navbar-collapse" id="navbar-globaltoc">
             <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
@@ -136,7 +135,6 @@
             </div>
           </div>
         </nav>
-        {% endif %}
 
         <div id="main-content" class="col-12">
           {% if pagename != 'index' %}

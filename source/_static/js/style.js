@@ -78,8 +78,7 @@ $(function(){
 		category = document.location.pathname.split('/')[2]; // [2] The URL contains the version; [1]	for URLs without version
 		category = (category.indexOf('.') < 0)?category:'';
 
-    console.log($('#select-version').val());
-		$('#menu-submenu').find('li').each(function(){
+    $('#menu-submenu').find('li').each(function(){
 			if ($(this).children('a').attr('href').indexOf(category) >= 0 && category.length > 0 ) {
 				$(this).addClass('active');
 			} else {
@@ -90,16 +89,21 @@ $(function(){
     if ($(window).width() >= breakpoint ){
       gTocElement.find('a').each(function(){
         href = $(this).prop('href');
-				if (href.indexOf(category+'/index.html') > 0 || href.indexOf(category+'/#') > 0){
+				/* Hides toc link for the parent node of current except on the main index page */
+				if ( $('.index').length === 0 && (href.indexOf(category+'/index.html') > 0 || href.indexOf(category+'/#') > 0)){
 					$(this).css('display', 'none');
 				}
+
         if ( href.indexOf(category) < 0 ){
           $(this).closest('.toctree-l1').css('display', 'none');
         } else {
           $(this).closest('.toctree-l1').css('display', 'block');
         }
       });
-    }
+    } else {
+			$('.toctree-l1').css('display', 'block');
+			gTocElement.find('a').css('display', 'block');
+		}
   }
 
    currentToc();
@@ -109,5 +113,6 @@ $(function(){
 		 var curWidth = $(this).width();
      $('table').removeClass('table-responsive');
      reponsiveTables();
+		 currentToc();
 	 });
 });
